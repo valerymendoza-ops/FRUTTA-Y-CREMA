@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frutta & Crema - El dulce sabor de Yotoco</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        rojoFresa: '#D82335',
+                        rojoHover: '#b51c2c',
+                        crema: '#FFFDD0',
+                        cremaSuave: '#FFFDF0',
+                        verdeBotanico: '#2E8B57',
+                        verdeHover: '#246f45',
+                        blancoCremoso: '#FFFDF6',
+                        textoOscuro: '#2C3E50',
+                        grisBg: '#F8F9FA'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        brand: ['Fredoka', 'cursive', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- ESTILOS ADICIONALES Y PERSONALIZADOS -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFFDF6;
+            color: #2C3E50;
+        }
+
+        .font-brand {
+            font-family: 'Fredoka', cursive, sans-serif;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFFDD0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D82335;
+            border-radius: 4px;
+        }
+
+        .product-card {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 28px -10px rgba(216, 35, 53, 0.15);
+        }
+
+        .modal-fade {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        /* Toast animation */
+        @keyframes slideInUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .animate-toast {
+            animation: slideInUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-rojoFresa selection:text-white">
+
+    <!-- HEADER / NAVEGACIÓN STICKY -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-amber-100 shadow-sm transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <!-- BRAND LOGO -->
+                <a href="#inicio" class="flex items-center gap-3 group">
+                    <div class="w-12 h-12 bg-crema rounded-full p-2 flex items-center justify-center border-2 border-rojoFresa group-hover:scale-105 transition-transform shadow-inner">
+                        <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-sm">
+                            <!-- Hojas Verdes -->
+                            <path d="M50 20 C 35 10, 25 25, 42 32 C 30 25, 20 40, 40 42 C 45 30, 50 20, 50 20 Z" fill="#2E8B57" />
+                            <path d="M50 20 C 65 10, 75 25, 58 32 C 70 25, 80 40, 60 42 C 55 30, 50 20, 50 20 Z" fill="#2E8B57" />
+                            <!-- Fresa Roja -->
+                            <path d="M 25 42 C 20 65, 32 88, 50 95 C 68 88, 80 65, 75 42 C 65 38, 35 38, 25 42 Z" fill="#D82335" />
+                            <!-- Semillas -->
+                            <circle cx="38" cy="55" r="1.5" fill="#FFFDD0" />
+                            <circle cx="50" cy="58" r="1.5" fill="#FFFDD0" />
+                            <circle cx="62" cy="55" r="1.5" fill="#FFFDD0" />
+                            <circle cx="44" cy="72" r="1.5" fill="#FFFDD0" />
+                            <circle cx="56" cy="72" r="1.5" fill="#FFFDD0" />
+                            <circle cx="50" cy="83" r="1.5" fill="#FFFDD0" />
+                            <!-- Crema -->
+                            <path d="M 32 50 C 30 42, 42 35, 50 40 C 60 32, 70 42, 65 52 C 58 45, 42 45, 32 50 Z" fill="#FFFDD0" />
+                            <path d="M 38 42 C 45 32, 55 35, 50 42 Z" fill="#FFFFFF" />
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="font-brand text-2xl font-bold text-rojoFresa tracking-tight block leading-none">Frutta & Crema</span>
+                        <span class="text-[10px] sm:text-xs text-verdeBotanico font-bold tracking-wider uppercase block">Postres & Frutas</span>
+                    </div>
+                </a>
+
+                <!-- NAV LINKS (DESKTOP) -->
+                <nav class="hidden lg:flex items-center space-x-6 text-sm font-semibold text-gray-700">
+                    <a href="#inicio" class="hover:text-rojoFresa transition-colors py-1">Inicio</a>
+                    <a href="#nosotros" class="hover:text-rojoFresa transition-colors py-1">Nosotros</a>
+                    <a href="#viabilidad" class="hover:text-rojoFresa transition-colors py-1">Viabilidad</a>
+                    <a href="#cronograma" class="hover:text-rojoFresa transition-colors py-1">Cronograma</a>
+                    <a href="#menu" class="hover:text-rojoFresa transition-colors py-1">Menú</a>
+                    <a href="#personalizar" class="hover:text-rojoFresa transition-colors py-1">Personalizar</a>
+                    <a href="#contacto" class="hover:text-rojoFresa transition-colors py-1">Contacto</a>
+                </nav>
+
+                <!-- ACTIONS & CODE EXPORTER BUTTON -->
+                <div class="flex items-center gap-3">
+                    <!-- Export Code Modal Trigger Button -->
+                    <button id="openCodeModalBtn" title="Ver / Copiar código fuente separado" class="px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl font-medium text-xs flex items-center gap-1.5 transition-all">
+                        <i class="fa-solid fa-code text-rojoFresa"></i>
+                        <span class="hidden sm:inline">Exportar Código</span>
+                    </button>
+
+                    <!-- Cart Button -->
+                    <button id="cartBtn" class="relative p-3 bg-crema text-rojoFresa rounded-full hover:bg-rojoFresa hover:text-white transition-all shadow-sm focus:ring-2 focus:ring-rojoFresa/30">
+                        <i class="fa-solid fa-basket-shopping text-lg"></i>
+                        <span id="cartCount" class="absolute -top-1 -right-1 bg-verdeBotanico text-white text-xs font-black w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">0</span>
+                    </button>
+
+                    <!-- Mobile Hamburger -->
+                    <button id="mobileMenuBtn" class="lg:hidden text-gray-700 p-2 text-xl focus:outline-none rounded-lg hover:bg-gray-100">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- MOBILE MENU DROPDOWN -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-white border-b border-gray-100 px-6 pt-3 pb-6 space-y-3 shadow-lg">
+            <a href="#inicio" class="block text-gray-700 hover:text-rojoFresa font-medium py-1.5 border-b border-gray-50">Inicio</a>
+            <a href="#nosotros" class="block text-gray-700 hover:text-rojoFresa font-medium py-1.5 border-b border-gray-50">Nosotros</a>
+            <a href="#viabilidad" class="block text-gray-700 hover:text-rojoFresa font-medium py-1.5 border-b border-gray-50">Viabilidad & Mercado</a>
+            <a href="#cronograma" class="block text-gray-700 hover:text-rojoFresa font-medium py-1.5 border-b border-gray-50">Cronograma del Proyecto</a>
+            <a href="#menu" class="block text-gray-700 hover:text-rojoFresa font-medium py-1.5 border-b border-gray-50">Menú & Catálogo</a>
+            <a href="#personalizar" class="block text-gray-700 hover:text-rojoFresa font-medium py-1.5 border-b border-gray-50">Personalizar Pedido</a>
+            <a href="#contacto" class="block text-gray-700 hover:text-rojoFresa font-medium py-1.5">Contacto & Ubicación</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="inicio" class="relative bg-gradient-to-b from-crema/60 via-blancoCremoso to-white py-16 md:py-24 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- HERO TEXT -->
+                <div class="space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-verdeBotanico/10 text-verdeBotanico text-xs font-extrabold tracking-wide uppercase border border-verdeBotanico/20">
+                        <i class="fa-solid fa-location-dot text-rojoFresa"></i> Yotoco, Valle del Cauca
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-textoOscuro leading-tight tracking-tight">
+                        Frescura y Sabor en Cada Bocado: <span class="text-rojoFresa block font-brand font-normal italic mt-1">“El dulce sabor de Yotoco”</span>
+                    </h1>
+                    <p class="text-gray-600 text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
+                        Propuesta de emprendimiento de postres artesanales, vasos de frutas seleccionadas y fresas con crema preparadas bajo estrictas normas de higiene y cadena de frío.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
+                        <a href="#menu" class="bg-rojoFresa hover:bg-rojoHover text-white px-8 py-3.5 rounded-xl font-bold text-sm shadow-lg shadow-rojoFresa/25 transition-all flex items-center justify-center gap-2 transform hover:-translate-y-0.5">
+                            <i class="fa-solid fa-utensils"></i> Explorar Catálogo
+                        </a>
+                        <a href="#personalizar" class="bg-verdeBotanico hover:bg-verdeHover text-white px-8 py-3.5 rounded-xl font-bold text-sm shadow-lg shadow-verdeBotanico/25 transition-all flex items-center justify-center gap-2 transform hover:-translate-y-0.5">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Crear Pedido Especial
+                        </a>
+                    </div>
+                </div>
+
+                <!-- HERO IMAGE CARD -->
+                <div class="relative flex justify-center">
+                    <div class="w-full max-w-md bg-white p-6 rounded-3xl shadow-xl border border-amber-100 relative z-10 text-center">
+                        <div class="relative overflow-hidden rounded-2xl mb-4 shadow-sm">
+                            <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=800&q=80" 
+                                 alt="Fresas con crema artesanales" 
+                                 class="w-full h-72 object-cover hover:scale-105 transition-transform duration-500"
+                                 onerror="this.onerror=null; this.src='https://placehold.co/600x400/D82335/FFFDD0?text=Fresas+con+Crema';">
+                            <span class="absolute top-3 right-3 bg-verdeBotanico text-white text-[10px] font-extrabold uppercase px-3 py-1 rounded-full shadow-md tracking-wider">
+                                100% Fresco
+                            </span>
+                        </div>
+                        <div class="flex justify-between items-center bg-crema/60 p-4 rounded-xl border border-amber-200/50">
+                            <div class="text-left">
+                                <span class="text-[11px] text-verdeBotanico font-bold uppercase tracking-wider block">Insignia de la Casa</span>
+                                <h3 class="font-brand text-lg font-bold text-textoOscuro">Fresas con Crema Tradicional</h3>
+                            </div>
+                            <span class="text-xl font-black text-rojoFresa">$8.000 COP</span>
+                        </div>
+                    </div>
+                    <!-- Decorative background circles -->
+                    <div class="absolute -top-6 -right-6 w-40 h-40 bg-rojoFresa/10 rounded-full blur-2xl"></div>
+                    <div class="absolute -bottom-6 -left-6 w-40 h-40 bg-verdeBotanico/15 rounded-full blur-2xl"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN IDENTIDAD CORPORATIVA COMPLETA -->
+    <section id="nosotros" class="py-16 md:py-24 bg-white border-t border-amber-100/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-rojoFresa font-bold text-xs tracking-widest uppercase bg-rojoFresa/10 px-3 py-1 rounded-full">Identidad del Proyecto</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-textoOscuro mt-2">Misión, Visión y Valores</h2>
+                <div class="w-16 h-1 bg-verdeBotanico mx-auto mt-3 rounded-full"></div>
+            </div>
+
+            <!-- MISIÓN Y VISIÓN GRID -->
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+                <!-- Misión -->
+                <div class="bg-blancoCremoso p-8 rounded-3xl border border-amber-200/80 shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
+                    <div class="w-12 h-12 bg-rojoFresa text-white rounded-2xl flex items-center justify-center text-xl font-bold mb-5 shadow-md shadow-rojoFresa/20">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </div>
+                    <h3 class="font-brand text-2xl font-bold text-textoOscuro mb-3">Misión</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm sm:text-base">
+                        Ofrecer postres, fresas con crema, vasos de frutas y productos personalizados de excelente calidad, elaborados con ingredientes frescos y cuidadosamente seleccionados, que brinden a nuestros clientes experiencias dulces, agradables y memorables en Yotoco y sus alrededores.
+                    </p>
+                </div>
+
+                <!-- Visión -->
+                <div class="bg-blancoCremoso p-8 rounded-3xl border border-amber-200/80 shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
+                    <div class="w-12 h-12 bg-verdeBotanico text-white rounded-2xl flex items-center justify-center text-xl font-bold mb-5 shadow-md shadow-verdeBotanico/20">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+                    <h3 class="font-brand text-2xl font-bold text-textoOscuro mb-3">Visión (Año 2031)</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm sm:text-base">
+                        Para el año 2031, ser un emprendimiento reconocido en Yotoco, Valle del Cauca, por la calidad, creatividad y presentación de nuestros productos. Aspiramos a consolidar una marca confiable, fortalecer nuestra presencia digital y ampliar progresivamente nuestra cobertura en la región.
+                    </p>
+                </div>
+            </div>
+
+            <!-- VALORES CORPORATIVOS (5 TARJETAS) -->
+            <div class="text-center mb-10">
+                <h3 class="font-brand text-2xl font-bold text-textoOscuro">Nuestros 5 Valores Corporativos</h3>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                <!-- Calidad -->
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all text-center group">
+                    <div class="w-12 h-12 mx-auto bg-red-50 text-rojoFresa rounded-full flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <h4 class="font-bold text-textoOscuro mb-2">1. Calidad</h4>
+                    <p class="text-xs text-gray-500 leading-relaxed">Ingredientes frescos y estándares estables en cada producto preparado.</p>
+                </div>
+
+                <!-- Responsabilidad -->
+                <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all text-center group">
+                    <div class="w-12 h-12 mx-auto bg-emerald-50 text-verdeBotanico rounded-full flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+                    <h4 class="font-bold text-textoOscuro mb-2">2. Responsabilidad</h4>
+                    <p class="text-xs text-gray-500 leading-relaxed">Cumplimiento oportuno de pedidos y rigurosas prácticas de higiene.</p>
+                </div>
+
+                <!-- Creatividad -->
+                <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all text-center group">
+                    <div class="w-12 h-12 mx-auto bg-amber-50 text-amber-500 rounded-full flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <h4 class="font-bold text-textoOscuro mb-2">3. Creatividad</h4>
+                    <p class="text-xs text-gray-500 leading-relaxed">Presentaciones originales y combinaciones adaptadas a cada ocasión.</p>
+                </div>
+
+                <!-- Honestidad -->
+                <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all text-center group">
+                    <div class="w-12 h-12 mx-auto bg-rose-50 text-rojoFresa rounded-full flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-handshake"></i>
+                    </div>
+                    <h4 class="font-bold text-textoOscuro mb-2">4. Honestidad</h4>
+                    <p class="text-xs text-gray-500 leading-relaxed">Precios transparentes y claridad total en nuestras condiciones.</p>
+                </div>
+
+                <!-- Compromiso -->
+                <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all text-center group">
+                    <div class="w-12 h-12 mx-auto bg-teal-50 text-verdeBotanico rounded-full flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <h4 class="font-bold text-textoOscuro mb-2">5. Compromiso</h4>
+                    <p class="text-xs text-gray-500 leading-relaxed">Atención personalizada y cercana para la plena satisfacción del cliente.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECCIÓN JUSTIFICACIÓN & PILARES DE VIABILIDAD DE MERCADO -->
+    <section id="viabilidad" class="py-16 md:py-24 bg-crema/30 border-t border-amber-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-verdeBotanico font-bold text-xs tracking-widest uppercase bg-verdeBotanico/10 px-3 py-1 rounded-full">Análisis de Oportunidad</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-textoOscuro mt-2">Justificación & Contexto de Mercado</h2>
+                <p class="text-gray-600 mt-2 text-sm sm:text-base">Respuestas concretas a la demanda local en Yotoco, Valle del Cauca</p>
+            </div>
+
+            <!-- OPORTUNIDAD EN YOTOCO -->
+            <div class="bg-white p-8 rounded-3xl border border-amber-200/70 shadow-sm mb-12">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="w-10 h-10 bg-rojoFresa/10 text-rojoFresa rounded-xl flex items-center justify-center text-lg font-bold">
+                        <i class="fa-solid fa-store"></i>
+                    </span>
+                    <h3 class="font-brand text-2xl font-bold text-textoOscuro">Oportunidad Identificada en Yotoco</h3>
+                </div>
+                <p class="text-gray-600 leading-relaxed text-sm sm:text-base">
+                    Existe una creciente preferencia por productos frescos, porciones listas para consumir y alternativas de repostería ligera para momentos de antojos cotidianos, meriendas familiares y celebraciones especiales. Frutta & Crema responde a esta necesidad mediante un modelo accesible de **venta directa y pedidos por encargo**, garantizando la máxima frescura en el municipio de Yotoco.
+                </p>
+            </div>
+
+            <!-- 5 PILARES DE VIABILIDAD -->
+            <h3 class="font-brand text-2xl font-bold text-textoOscuro text-center mb-8">5 Pilares de Viabilidad del Emprendimiento</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-2">
+                    <div class="text-rojoFresa text-lg font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-layer-group"></i> 1. Oferta Combinada
+                    </div>
+                    <p class="text-xs text-gray-600 leading-relaxed">
+                        Variedad de fresas con crema, vasos frutales y postres en porciones individuales que amplían la base de clientes.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-2">
+                    <div class="text-verdeBotanico text-lg font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-sliders"></i> 2. Personalización
+                    </div>
+                    <p class="text-xs text-gray-600 leading-relaxed">
+                        Permite a los clientes elegir tamaños, toppings y mensajes para detalles o eventos familiares.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-2">
+                    <div class="text-amber-600 text-lg font-bold flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp"></i> 3. Promoción Digital
+                    </div>
+                    <p class="text-xs text-gray-600 leading-relaxed">
+                        Canal directo de pedidos por encargo vía WhatsApp e interacción constante a través de redes sociales.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-2">
+                    <div class="text-rojoFresa text-lg font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-calculator"></i> 4. Control de Costos
+                    </div>
+                    <p class="text-xs text-gray-600 leading-relaxed">
+                        Estandarización estricta de porciones y costos de ingredientes para asegurar la rentabilidad.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-2 md:col-span-2 lg:col-span-2">
+                    <div class="text-verdeBotanico text-lg font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-repeat"></i> 5. Identidad Corporativa & Recompras
+                    </div>
+                    <p class="text-xs text-gray-600 leading-relaxed">
+                        Posicionamiento claro de marca en Yotoco con empaques bien presentados que impulsan la recompra constante de los clientes.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- VALOR DIFERENCIAL & CADENA DE FRÍO -->
+            <div class="bg-blancoCremoso p-8 rounded-3xl border border-verdeBotanico/30 shadow-sm">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="w-10 h-10 bg-verdeBotanico/10 text-verdeBotanico rounded-xl flex items-center justify-center text-lg font-bold">
+                        <i class="fa-solid fa-snowflake"></i>
+                    </span>
+                    <h3 class="font-brand text-2xl font-bold text-textoOscuro">Valor Diferencial & Cadena de Frío</h3>
+                </div>
+                <p class="text-gray-600 leading-relaxed text-sm sm:text-base">
+                    Nuestro diferencial radicará en la impecable **conservación de la cadena de frío**, el cuidado extremo en la selección de fruta fresca de origen y la higiene en la manipulación de la crema de la casa, ofreciendo empaques prácticos y herméticos para una entrega limpia y conservada.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CRONOGRAMA DEL PROYECTO (10 SEMANAS INTERACTIVO) -->
+    <section id="cronograma" class="py-16 md:py-24 bg-white border-t border-amber-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-rojoFresa font-bold text-xs tracking-widest uppercase bg-rojoFresa/10 px-3 py-1 rounded-full">Plan de Trabajo Akademico</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-textoOscuro mt-2">Cronograma del Proyecto (10 Semanas)</h2>
+                <p class="text-gray-600 mt-2 text-sm sm:text-base">Evolución metodológica del empremiento desde el diagnóstico hasta BI & Power BI</p>
+            </div>
+
+            <!-- ACORDEÓN / TABLA INTERACTIVA DE 10 SEMANAS -->
+            <div class="max-w-4xl mx-auto space-y-3" id="timelineAccordion">
+                
+                <!-- Semana 1 -->
+                <div class="border border-gray-200 rounded-2xl overflow-hidden bg-white shadow-sm transition-all">
+                    <button class="w-full p-4 text-left flex justify-between items-center bg-gray-50 hover:bg-crema/40 transition-colors accordion-toggle">
+                        <span class="font-bold text-textoOscuro text-sm sm:text-base flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-rojoFresa text-white text-xs flex items-center justify-center font-black">S1</span>
+                            Semana 1: Configuración Inicial y Modelo de Negocio
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform"></i>
+                    </button>
+                    <div class="p-5 border-t border-gray-100 hidden text-xs sm:text-sm text-gray-600 space-y-2 bg-white">
+                        <p><strong>Actividades Principales:</strong> Definición del nombre "Frutta & Crema", diseño de identidad visual y planteamiento de propuesta de valor en Yotoco.</p>
+                        <p class="text-verdeBotanico font-semibold"><strong>Entregable:</strong> Documento del modelo de negocio estructurado.</p>
+                    </div>
+                </div>
+
+                <!-- Semana 2 -->
+                <div class="border border-gray-200 rounded-2xl overflow-hidden bg-white shadow-sm transition-all">
+                    <button class="w-full p-4 text-left flex justify-between items-center bg-gray-50 hover:bg-crema/40 transition-colors accordion-toggle">
+                        <span class="font-bold text-textoOscuro text-sm sm:text-base flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-rojoFresa text-white text-xs flex items-center justify-center font-black">S2</span>
+                            Semana 2: Misión, Visión y Valores Corporativos
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform"></i>
+                    </button>
+                    <div class="p-5 border-t border-gray-100 hidden text-xs sm:text-sm text-gray-600 space-y-2 bg-white">
+                        <p><strong>Actividades Principales:</strong> Redacción de la Misión, proyección de Visión hacia el 2031 y definición de los 5 valores corporativos.</p>
+                        <p class="text-verdeBotanico font-semibold"><strong>Entregable:</strong> Declaración estratégica de la marca.</p>
+                    </div>
+                </div>
+
+                <!-- Semana 3 -->
+                <div class="border border-gray-200 rounded-2xl overflow-hidden bg-white shadow-sm transition-all">
+                    <button class="w-full p-4 text-left flex justify-between items-center bg-gray-50 hover:bg-crema/40 transition-colors accordion-toggle">
+                        <span class="font-bold text-textoOscuro text-sm sm:text-base flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-rojoFresa text-white text-xs flex items-center justify-center font-black">S3</span>
+                            Semana 3: Justificación y Análisis de Mercado Local
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform"></i>
+                    </button>
+                    <div class="p-5 border-t border-gray-100 hidden text-xs sm:text-sm text-gray-600 space-y-2 bg-white">
+                        <p><strong>Actividades Principales:</strong> Evaluación de demanda en Yotoco, competidores de repostería y los 5 pilares de viabilidad.</p>
+                        <p class="text-verdeBotanico font-semibold"><strong>Entregable:</strong> Informe de viabilidad y contexto local.</p>
+                    </div>
+                </div>
+
+                <!-- Semana 4 -->
+                <div class="border border-gray-200 rounded-2xl overflow-hidden bg-white shadow-sm transition-all">
+                    <button class="w-full p-4 text-left flex justify-between items-center bg-gray-50 hover:bg-crema/40 transition-colors accordion-toggle">
+                        <span class="font-bold text-textoOscuro text-sm sm:text-base flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-rojoFresa text-white text-xs flex items-center justify-center font-black">S4</span>
+                            Semana 4: Diseño del Catálogo y Costeo de Productos
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform"></i>
+                    </button>
+                    <div class="p-5 border-t border-gray-100 hidden text-xs sm:text-sm text-gray-600 space-y-2 bg-white">
+                        <p><strong>Actividades Principales:</strong> Fichas técnicas de recetas (fresas, frutas, postres) y determinación de margen de ganancia.</p>
+                        <p class="text-verdeBotanico font-semibold"><strong>Entregable:</strong> Matriz de precios y estructura de catálogo.</p>
+                    </div>
+                </div>
+
+                <!-- Semana 5 -->
+                <div class="border border-gray-200 rounded-2xl overflow-hidden bg-white shadow-sm transition-all">
+                    <button class="w-full p-4 text-left flex justify-between items-center bg-gray-50 hover:bg-crema/40 transition-colors accordion-toggle">
+                        <span class="font-bold text-textoOscuro text-sm sm:text-base flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-rojoFresa text-white text-xs flex items-center justify-center font-black">S5</span>
+                            Semana 5: Protocolos de Higiene y Cadena de Frío
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform"></i>
+                    </button>
+                    <div class="p-5 border-t border-gray-100 hidden text-xs sm:text-sm text-gray-600 space-y-2 bg-white">
+                        <p><strong>Actividades Principales:</strong> Definición de empaques herméticos, condiciones de refrigeración e higiene de manipulación.</p>
+                        <p class="text-verdeBotanico font-semibold"><strong>Entregable:</strong> Manual de calidad y conservación.</p>
+                    </div>
+                </div>
+
+                <!-- Semana 6 -->
+                <div class="border border-gray-200 rounded-2xl overflow-hidden bg-white shadow-sm transition-all">
+                    <button class="w-full p-4 text-left flex justify-between items-center bg-gray-50 hover:bg-crema/40 transition-colors accordion-toggle">
+                        <span class="font-bold text-textoOscuro text-sm sm:text-base flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-rojoFresa text-white text-xs flex items-center justify-center font-black">S6</span>
+                            Semana 6: Estrategia de Marketing Digital y Encargos
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform"></i>
+                    </button>
+                    <div class="p-5 border-t border-gray-100 hidden text-xs sm:text-sm text-gray-600 space-y-2 bg-white">
+                        <p><strong>Actividades Principales:</strong> Configuración de prototipo web y canal directo de pedidos vía WhatsApp para domicilios/recogida.</p>
+                        <p class="text-verdeBotanico font-semibold"><strong>Entregable:</strong> Flujo operativo de ventas digitales.</p>
+                    </div>
+                </div>
+
+                <!-- Semana 7 -->
+                <div class="border border-gray-200 rounded-2xl overflow-hidden bg-white shadow-sm transition-all">
+                    <button class="w-full p-4 text-left flex justify-between items-center bg-gray-50 hover:bg-crema/40 transition-colors accordion-toggle">
+                        <span class="font-bold text-textoOscuro text-sm sm:text-base flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-rojoFresa text-white text-xs flex items-center justify-center font-black">S7</span>
+                            Semana 7: Módulo de Personalización e Interacción
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform"></i>
+                    </button>
+                    <div class="p-5 border-t border-gray-100 hidden text-xs sm:text-sm text-gray-600 space-y-2 bg-white">
+                        <p><strong>Actividades Principales:</strong> Desarrollo de cotizador interactivo paso a paso para pedidos con mensajes y adicionles especiales.</p>
+                        <p class="text-verdeBotanico font-semibold"><strong>Entregable:</strong> Módulo web de personalización activo.</p>
+                    </div>
+                </div>
+
+                <!-- Semana 8 -->
+                <div class="border border-gray-200 rounded-2xl overflow-hidden bg-white shadow-sm transition-all">
+                    <button class="w-full p-4 text-left flex justify-between items-center bg-gray-50 hover:bg-crema/40 transition-colors accordion-toggle">
+                        <span class="font-bold text-textoOscuro text-sm sm:text-base flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-rojoFresa text-white text-xs flex items-center justify-center font-black">S8</span>
+                            Semana 8: Pruebas de Usuario y Optimización Web
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform"></i>
+                    </button>
+                    <div class="p-5 border-t border-gray-100 hidden text-xs sm:text-sm text-gray-600 space-y-2 bg-white">
+                        <p><strong>Actividades Principales:</strong> Ajustes de interfaz responsive en dispositivos móviles y cálculo dinámico en carrito.</p>
+                        <p class="text-verdeBotanico font-semibold"><strong>Entregable:</strong> Plataforma web sin errores funcional.</p>
+                    </div>
+                </div>
+
+                <!-- Semana 9 -->
+                <div class="border-2 border-rojoFresa/40 rounded-2xl overflow-hidden bg-red-50/20 shadow-sm transition-all">
+                    <button class="w-full p-4 text-left flex justify-between items-center bg-red-50/50 hover:bg-red-50 transition-colors accordion-toggle">
+                        <span class="font-bold text-textoOscuro text-sm sm:text-base flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-rojoFresa text-white text-xs flex items-center justify-center font-black">S9</span>
+                            Semana 9: Business Intelligence (BI) y Modelado de Datos
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-rojoFresa transition-transform"></i>
+                    </button>
+                    <div class="p-5 border-t border-red-100 hidden text-xs sm:text-sm text-gray-600 space-y-2 bg-white">
+                        <p><strong>Actividades Principales:</strong> Estructuración de datos contables de ventas, costos de materias primas y categorías más vendidas.</p>
+                        <p class="text-rojoFresa font-bold"><strong>Entregable:</strong> Dataset consolidado para análisis financiero y contable.</p>
+                    </div>
+                </div>
+
+                <!-- Semana 10 -->
+                <div class="border-2 border-verdeBotanico/40 rounded-2xl overflow-hidden bg-emerald-50/20 shadow-sm transition-all">
+                    <button class="w-full p-4 text-left flex justify-between items-center bg-emerald-50/50 hover:bg-emerald-50 transition-colors accordion-toggle">
+                        <span class="font-bold text-textoOscuro text-sm sm:text-base flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-verdeBotanico text-white text-xs flex items-center justify-center font-black">S10</span>
+                            Semana 10: Dashboard Power BI y Cierre Académico
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-verdeBotanico transition-transform"></i>
+                    </button>
+                    <div class="p-5 border-t border-emerald-100 hidden text-xs sm:text-sm text-gray-600 space-y-2 bg-white">
+                        <p><strong>Actividades Principales:</strong> Creación de tableros interactivos Power BI para monitoreo de KPI contables, margen bruto y recompras.</p>
+                        <p class="text-verdeBotanico font-bold"><strong>Entregable:</strong> Dashboard Power BI & Informe final completado.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- MENÚ / CATÁLOGO INTERACTIVO -->
+    <section id="menu" class="py-16 md:py-24 bg-crema/30 border-t border-amber-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-verdeBotanico font-bold text-xs tracking-widest uppercase bg-verdeBotanico/10 px-3 py-1 rounded-full">Variedad & Delicias</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-textoOscuro mt-2">Catálogo de Productos</h2>
+                <p class="text-gray-600 mt-2 text-sm sm:text-base">Selecciona una categoría y agrega tus antojos al carrito</p>
+            </div>
+
+            <!-- CATEGORY FILTER BUTTONS -->
+            <div class="flex flex-wrap justify-center gap-2.5 mb-10" id="categoryFilters">
+                <button data-category="todos" class="filter-btn active bg-rojoFresa text-white px-5 py-2.5 rounded-full font-bold text-xs shadow-md transition-all">Todos</button>
+                <button data-category="fresas" class="filter-btn bg-white text-gray-700 hover:bg-crema px-5 py-2.5 rounded-full font-bold text-xs border border-gray-200 transition-all">Fresas con Crema</button>
+                <button data-category="frutas" class="filter-btn bg-white text-gray-700 hover:bg-crema px-5 py-2.5 rounded-full font-bold text-xs border border-gray-200 transition-all">Vasos de Frutas</button>
+                <button data-category="postres" class="filter-btn bg-white text-gray-700 hover:bg-crema px-5 py-2.5 rounded-full font-bold text-xs border border-gray-200 transition-all">Postres de la Casa</button>
+            </div>
+
+            <!-- PRODUCTS GRID -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="productsGrid">
+                <!-- Se renderizan los productos por JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CONFIGURADOR INTERACTIVO DE PERSONALIZACIÓN -->
+    <section id="personalizar" class="py-16 md:py-24 bg-white border-t border-amber-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-br from-blancoCremoso via-crema/40 to-white p-8 md:p-12 rounded-3xl border border-amber-200/80 shadow-lg">
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <span class="text-rojoFresa font-bold text-xs tracking-widest uppercase bg-rojoFresa/10 px-3 py-1 rounded-full">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Personaliza tu Experiencia
+                    </span>
+                    <h2 class="text-3xl font-extrabold text-textoOscuro mt-2">Creador de Pedidos Especiales</h2>
+                    <p class="text-gray-600 text-sm sm:text-base mt-1">Arma tu postre paso a paso con adicionales y mensaje personalizado para regalos.</p>
+                </div>
+
+                <form id="customizerForm" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    
+                    <!-- PASO 1: BASE Y TAMAÑO -->
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-4">
+                        <h3 class="font-bold text-base text-rojoFresa flex items-center gap-2">
+                            <span class="w-7 h-7 bg-rojoFresa text-white rounded-full text-xs flex items-center justify-center font-bold">1</span> Base y Tamaño
+                        </h3>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Selecciona la Base</label>
+                            <select id="customBase" class="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-rojoFresa bg-gray-50 text-sm">
+                                <option value="Fresas con Crema" data-price="8000">Fresas con Crema Base ($8.000 COP)</option>
+                                <option value="Mix Frutal de Temporada" data-price="7000">Mix Frutal Fina ($7.000 COP)</option>
+                                <option value="Base Crema & Galleta" data-price="7500">Base Crema & Galleta ($7.500 COP)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Tamaño del Vaso</label>
+                            <select id="customSize" class="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-rojoFresa bg-gray-50 text-sm">
+                                <option value="Personal (10 oz)" data-extra="0">Personal (10 oz) (+$0 COP)</option>
+                                <option value="Mediano (14 oz)" data-extra="2000">Mediano (14 oz) (+$2.000 COP)</option>
+                                <option value="Familiar (20 oz)" data-extra="4500">Familiar (20 oz) (+$4.500 COP)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- PASO 2: TOPPINGS / ADICIONES -->
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-4">
+                        <h3 class="font-bold text-base text-verdeBotanico flex items-center gap-2">
+                            <span class="w-7 h-7 bg-verdeBotanico text-white rounded-full text-xs flex items-center justify-center font-bold">2</span> Toppings & Adiciones
+                        </h3>
+                        <div class="space-y-2 text-xs sm:text-sm text-gray-700">
+                            <label class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer border border-transparent hover:border-gray-100">
+                                <input type="checkbox" class="topping-check accent-verdeBotanico w-4 h-4" value="Nutella extra" data-price="2000">
+                                <span>Nutella Extra (+$2.000)</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer border border-transparent hover:border-gray-100">
+                                <input type="checkbox" class="topping-check accent-verdeBotanico w-4 h-4" value="Queso costeño rallado" data-price="1500">
+                                <span>Queso Costeño Rallado (+$1.500)</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer border border-transparent hover:border-gray-100">
+                                <input type="checkbox" class="topping-check accent-verdeBotanico w-4 h-4" value="Galleta Oreo Triturada" data-price="1500">
+                                <span>Galleta Oreo Triturada (+$1.500)</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer border border-transparent hover:border-gray-100">
+                                <input type="checkbox" class="topping-check accent-verdeBotanico w-4 h-4" value="Leche Condensada" data-price="1000">
+                                <span>Leche Condensada (+$1.000)</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer border border-transparent hover:border-gray-100">
+                                <input type="checkbox" class="topping-check accent-verdeBotanico w-4 h-4" value="Granola Crocante" data-price="1200">
+                                <span>Granola Crocante (+$1.200)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- PASO 3: DETALLE PERSONALIZADO Y PRECIO -->
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between space-y-4">
+                        <div>
+                            <h3 class="font-bold text-base text-rojoFresa flex items-center gap-2 mb-4">
+                                <span class="w-7 h-7 bg-rojoFresa text-white rounded-full text-xs flex items-center justify-center font-bold">3</span> Mensaje / Nota Especial
+                            </h3>
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Mensaje en Tarjeta / Detalles</label>
+                            <textarea id="customNote" rows="3" placeholder="Ej: 'Feliz Cumpleaños Mamá', 'Entregar con cinta de regalo'..." class="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-rojoFresa text-xs sm:text-sm bg-gray-50"></textarea>
+                        </div>
+
+                        <div class="bg-crema/80 p-4 rounded-xl border border-amber-200/80">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-xs font-bold uppercase text-gray-600">Total Estimado:</span>
+                                <span id="customPriceTotal" class="text-2xl font-black text-rojoFresa">$8.000 COP</span>
+                            </div>
+                            <button type="submit" class="w-full bg-rojoFresa hover:bg-rojoHover text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider shadow-md flex items-center justify-center gap-2 transition-all">
+                                <i class="fa-solid fa-plus"></i> Añadir Pedido Personalizado
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO & UBICACIÓN LOCAL EN YOTOCO -->
+    <section id="contacto" class="py-16 md:py-24 bg-blancoCremoso border-t border-amber-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                
+                <div>
+                    <span class="text-verdeBotanico font-bold text-xs tracking-widest uppercase bg-verdeBotanico/10 px-3 py-1 rounded-full">Atención Directa</span>
+                    <h2 class="text-3xl font-extrabold text-textoOscuro mt-2 mb-4">Haz tu Pedido por Encargo</h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed text-sm sm:text-base">
+                        Atendemos solicitudes individuales o cotizaciones para eventos especiales en Yotoco, Valle del Cauca. Garantizamos cadena de frío y empaques aptos.
+                    </p>
+                    
+                    <div class="space-y-4 text-xs sm:text-sm font-medium">
+                        <div class="flex items-center gap-4 bg-white p-4 rounded-2xl border border-amber-100 shadow-sm">
+                            <div class="w-10 h-10 bg-rojoFresa/10 text-rojoFresa rounded-full flex items-center justify-center text-lg flex-shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-textoOscuro">Ubicación Principal</h4>
+                                <p class="text-gray-500">Yotoco, Valle del Cauca - Colombia</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 bg-white p-4 rounded-2xl border border-amber-100 shadow-sm">
+                            <div class="w-10 h-10 bg-verdeBotanico/10 text-verdeBotanico rounded-full flex items-center justify-center text-lg flex-shrink-0">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-textoOscuro">Horarios de Encargo</h4>
+                                <p class="text-gray-500">Lunes a Domingo: 10:00 AM - 7:30 PM</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4 bg-white p-4 rounded-2xl border border-amber-100 shadow-sm">
+                            <div class="w-10 h-10 bg-amber-500/10 text-amber-600 rounded-full flex items-center justify-center text-lg flex-shrink-0">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-textoOscuro">Atención Telefónica / WhatsApp</h4>
+                                <p class="text-gray-500">+57 300 000 0000</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FORMULARIO DE MENSAJES -->
+                <div class="bg-white p-8 rounded-3xl border border-gray-200/80 shadow-md">
+                    <h3 class="font-brand text-2xl font-bold text-textoOscuro mb-4">¿Tienes preguntas o eventos?</h3>
+                    <form id="contactForm" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Nombre Completo</label>
+                            <input type="text" required placeholder="Tu nombre" class="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-rojoFresa text-xs sm:text-sm bg-gray-50">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Teléfono o WhatsApp</label>
+                            <input type="tel" required placeholder="Ej. 310 123 4567" class="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-rojoFresa text-xs sm:text-sm bg-gray-50">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Consulta o Encargo</label>
+                            <textarea rows="3" required placeholder="Escribe tu consulta sobre disponibilidad, cotizaciones o eventos..." class="w-full p-3 rounded-xl border border-gray-200 focus:outline-none focus:border-rojoFresa text-xs sm:text-sm bg-gray-50"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-verdeBotanico hover:bg-verdeHover text-white py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider shadow-md transition-all">
+                            Enviar Mensaje
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER INSTITUCIONAL -->
+    <footer class="bg-textoOscuro text-white py-12 border-t-4 border-rojoFresa">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-gray-700">
+                
+                <!-- Columna Marca -->
+                <div class="space-y-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-crema text-rojoFresa rounded-full p-1.5 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-strawberry text-2xl"></i>
+                        </div>
+                        <span class="font-brand text-2xl font-bold text-crema">Frutta & Crema</span>
+                    </div>
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        Emprendimiento de postres & frutas. Eslogan oficial: <span class="text-crema italic">“El dulce sabor de Yotoco”</span>.
+                    </p>
+                    <p class="text-xs text-gray-400">Yotoco, Valle del Cauca - Colombia</p>
+                </div>
+
+                <!-- Columna Proyecto Académico -->
+                <div class="space-y-2 text-xs text-gray-300">
+                    <h4 class="font-bold text-white text-sm mb-2 uppercase tracking-wider">Proyecto Académico</h4>
+                    <p><i class="fa-solid fa-user-graduate text-rojoFresa mr-1.5"></i> Autora: Valery Rodríguez Mendoza</p>
+                    <p><i class="fa-solid fa-book text-verdeBotanico mr-1.5"></i> Programa: Contaduría Pública</p>
+                    <p><i class="fa-solid fa-university text-amber-400 mr-1.5"></i> Sede: Guadalajara de Buga / Yotoco</p>
+                </div>
+
+                <!-- Columna Navegación Rápida -->
+                <div class="space-y-2 text-xs text-gray-300">
+                    <h4 class="font-bold text-white text-sm mb-2 uppercase tracking-wider">Navegación</h4>
+                    <div class="grid grid-cols-2 gap-1">
+                        <a href="#inicio" class="hover:text-crema transition-colors">Inicio</a>
+                        <a href="#nosotros" class="hover:text-crema transition-colors">Nosotros</a>
+                        <a href="#viabilidad" class="hover:text-crema transition-colors">Viabilidad</a>
+                        <a href="#cronograma" class="hover:text-crema transition-colors">Cronograma</a>
+                        <a href="#menu" class="hover:text-crema transition-colors">Menú</a>
+                        <a href="#personalizar" class="hover:text-crema transition-colors">Personalizar</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="pt-8 text-center text-xs text-gray-400 flex flex-col sm:flex-row justify-between items-center gap-2">
+                <p>&copy; 2026 Frutta & Crema. Todos los derechos reservados.</p>
+                <p>Ubicación local: Yotoco, Valle del Cauca</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL DE CARRITO DE COMPRAS FLOTANTE -->
+    <div id="cartModal" class="fixed inset-0 bg-black/60 z-50 flex justify-end opacity-0 pointer-events-none modal-fade">
+        <div class="bg-white w-full max-w-md h-full shadow-2xl flex flex-col justify-between p-6 overflow-y-auto">
+            <div>
+                <!-- Header -->
+                <div class="flex justify-between items-center border-b border-gray-100 pb-4 mb-4">
+                    <h3 class="font-brand text-xl font-bold text-textoOscuro flex items-center gap-2">
+                        <i class="fa-solid fa-basket-shopping text-rojoFresa"></i> Tu Carrito de Compras
+                    </h3>
+                    <button id="closeCartBtn" class="text-gray-400 hover:text-gray-600 text-xl p-1">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <!-- Item List Container -->
+                <div id="cartItemsContainer" class="space-y-3">
+                    <!-- Renderizado vía JS -->
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="border-t border-gray-100 pt-4 mt-6 space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Opción de Entrega</label>
+                    <select id="deliveryOption" class="w-full p-2.5 rounded-xl border border-gray-200 text-xs sm:text-sm bg-gray-50">
+                        <option value="Domicilio en Yotoco">Domicilio en Yotoco (+$2.000 COP)</option>
+                        <option value="Recogida en Punto">Recogida Personalizada ($0 COP)</option>
+                    </select>
+                </div>
+
+                <div class="flex justify-between items-center text-lg font-bold">
+                    <span>Total a Pagar:</span>
+                    <span id="cartTotal" class="text-2xl text-rojoFresa font-black">$0 COP</span>
+                </div>
+
+                <button id="checkoutBtn" class="w-full bg-verdeBotanico hover:bg-verdeHover text-white py-3.5 rounded-xl font-bold shadow-lg flex items-center justify-center gap-2 text-sm uppercase tracking-wider transition-all">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Enviar Pedido por WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE EXPORTACIÓN / VISUALIZACIÓN DE CÓDIGO FUENTE SEPARADO -->
+    <div id="codeExporterModal" class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none modal-fade">
+        <div class="bg-white w-full max-w-4xl max-h-[90vh] rounded-3xl shadow-2xl flex flex-col overflow-hidden">
+            <!-- Modal Header -->
+            <div class="p-5 bg-textoOscuro text-white flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-code text-rojoFresa text-xl"></i>
+                    <h3 class="font-brand text-lg font-bold">Código Fuente Separado del Proyecto</h3>
+                </div>
+                <button id="closeCodeModalBtn" class="text-gray-300 hover:text-white text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Tabs Navigation -->
+            <div class="flex border-b border-gray-200 bg-gray-100 px-4 pt-2">
+                <button data-tab="tab-html" class="code-tab active bg-white text-rojoFresa font-bold px-4 py-2 rounded-t-xl text-xs sm:text-sm border-t border-x border-gray-200">index.html</button>
+                <button data-tab="tab-css" class="code-tab text-gray-600 font-bold px-4 py-2 rounded-t-xl text-xs sm:text-sm hover:text-rojoFresa">style.css</button>
+                <button data-tab="tab-js" class="code-tab text-gray-600 font-bold px-4 py-2 rounded-t-xl text-xs sm:text-sm hover:text-rojoFresa">main.js</button>
+            </div>
+
+            <!-- Code Content Box -->
+            <div class="p-4 flex-1 overflow-y-auto bg-gray-900 text-gray-100 font-mono text-xs leading-relaxed relative">
+                
+                <!-- Tab HTML -->
+                <div id="tab-html" class="code-content">
+                    <div class="flex justify-between items-center mb-2 pb-2 border-b border-gray-800 text-gray-400">
+                        <span>Estructura HTML5</span>
+                        <button onclick="copyCodeContent('codeHtmlText')" class="px-3 py-1 bg-rojoFresa text-white rounded text-[11px] font-sans font-bold hover:bg-rojoHover transition-all">
+                            <i class="fa-solid fa-copy mr-1"></i> Copiar index.html
+                        </button>
+                    </div>
+                    <pre id="codeHtmlText" class="whitespace-pre-wrap break-all">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="es" class="scroll-smooth"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Frutta & Crema - El dulce sabor de Yotoco&lt;/title&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+    &lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;
+    &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Estructura HTML de Frutta & Crema --&gt;
+    &lt;script src="main.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                    </pre>
+                </div>
+
+                <!-- Tab CSS -->
+                <div id="tab-css" class="code-content hidden">
+                    <div class="flex justify-between items-center mb-2 pb-2 border-b border-gray-800 text-gray-400">
+                        <span>Estilos CSS3 / Custom Variables</span>
+                        <button onclick="copyCodeContent('codeCssText')" class="px-3 py-1 bg-rojoFresa text-white rounded text-[11px] font-sans font-bold hover:bg-rojoHover transition-all">
+                            <i class="fa-solid fa-copy mr-1"></i> Copiar style.css
+                        </button>
+                    </div>
+                    <pre id="codeCssText" class="whitespace-pre-wrap break-all">
+/* ==========================================
+   HOJA DE ESTILOS: style.css
+   Frutta & Crema - Yotoco, Valle del Cauca
+   ========================================== */
+
+:root {
+    --rojo-fresa: #D82335;
+    --crema: #FFFDD0;
+    --verde-botanico: #2E8B57;
+    --blanco-cremoso: #FFFDF6;
+    --texto-oscuro: #2C3E50;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--blanco-cremoso);
+    color: var(--texto-oscuro);
+}
+
+.brand-font {
+    font-family: 'Fredoka', cursive, sans-serif;
+}
+
+.product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 28px -10px rgba(216, 35, 53, 0.15);
+}
+                    </pre>
+                </div>
+
+                <!-- Tab JS -->
+                <div id="tab-js" class="code-content hidden">
+                    <div class="flex justify-between items-center mb-2 pb-2 border-b border-gray-800 text-gray-400">
+                        <span>Lógica JavaScript (main.js)</span>
+                        <button onclick="copyCodeContent('codeJsText')" class="px-3 py-1 bg-rojoFresa text-white rounded text-[11px] font-sans font-bold hover:bg-rojoHover transition-all">
+                            <i class="fa-solid fa-copy mr-1"></i> Copiar main.js
+                        </button>
+                    </div>
+                    <pre id="codeJsText" class="whitespace-pre-wrap break-all">
+// ==========================================
+// LÓGICA DE INTERACCIÓN: main.js
+// Frutta & Crema - Yotoco, Valle del Cauca
+// ==========================================
+
+const productsData = [
+    { id: 1, name: "Fresas con Crema Tradicional", category: "fresas", price: 8000 },
+    { id: 2, name: "Fresas con Nutella & Queso Costeño", category: "fresas", price: 10500 },
+    { id: 3, name: "Fresas Especial Oreo", category: "fresas", price: 9500 },
+    { id: 4, name: "Mix Frutal de Temporada", category: "frutas", price: 7000 },
+    { id: 5, name: "Vaso Frutal Tropical", category: "frutas", price: 8500 },
+    { id: 6, name: "Postre Artesanal de Limón", category: "postres", price: 7500 },
+    { id: 7, name: "Torta de la Casa en Vaso", category: "postres", price: 8000 }
+];
+
+let cart = [];
+
+function updateCartUI() {
+    console.log("Carrito actualizado:", cart);
+}
+                    </pre>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 bg-textoOscuro text-white px-5 py-3 rounded-2xl shadow-xl flex items-center gap-3 hidden border-l-4 border-verdeBotanico">
+        <i class="fa-solid fa-circle-check text-verdeBotanico text-xl"></i>
+        <span id="toastMessage" class="text-xs font-bold">Producto añadido al carrito</span>
+    </div>
+
+    <!-- ==========================================
+         SECCIÓN DE LÓGICA JAVASCRIPT: main.js
+         ========================================== -->
+    <script>
+        // DATOS OFICIALES DEL CATÁLOGO DE PRODUCTOS
+        const productsData = [
+            {
+                id: 1,
+                name: "Fresas con Crema Tradicional",
+                category: "fresas",
+                price: 8000,
+                description: "Fresas frescas seleccionadas cubiertas con la receta suave de crema especial de la casa.",
+                image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 2,
+                name: "Fresas con Nutella & Queso Costeño",
+                category: "fresas",
+                price: 10500,
+                description: "Irresistible contraste agridulce: crema suave, hilos de Nutella y queso costeño rallado.",
+                image: "https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 3,
+                name: "Fresas Especial Oreo",
+                category: "fresas",
+                price: 9500,
+                description: "Capas de crema de la casa, fresas dulces y trozos crujientes de galleta Oreo.",
+                image: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 4,
+                name: "Mix Frutal de Temporada",
+                category: "frutas",
+                price: 7000,
+                description: "Mezcla refrescante de frutas seleccionadas con adición suave opcional de leche condensada.",
+                image: "https://images.unsplash.com/photo-1519996529931-28324d5a630e?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 5,
+                name: "Vaso Frutal Tropical",
+                category: "frutas",
+                price: 8500,
+                description: "Combinación de frutas de la región, crema dulce de la casa y granola crocante.",
+                image: "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 6,
+                name: "Postre Artesanal de Limón",
+                category: "postres",
+                price: 7500,
+                description: "Equilibrio cítrico perfecto con crema dulce y galletas finamente trituradas.",
+                image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 7,
+                name: "Torta de la Casa en Vaso",
+                category: "postres",
+                price: 8000,
+                description: "Capas de bizcocho esponjoso, crema artesanal y mermelada dulce de fresas.",
+                image: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=600&q=80"
+            }
+        ];
+
+        // ESTADO GLOBAL
+        let cart = [];
+
+        // ELEMENTOS DOM
+        const productsGrid = document.getElementById('productsGrid');
+        const cartBtn = document.getElementById('cartBtn');
+        const closeCartBtn = document.getElementById('closeCartBtn');
+        const cartModal = document.getElementById('cartModal');
+        const cartCount = document.getElementById('cartCount');
+        const cartItemsContainer = document.getElementById('cartItemsContainer');
+        const cartTotal = document.getElementById('cartTotal');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        const deliveryOption = document.getElementById('deliveryOption');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        // Modal Code Exporter
+        const openCodeModalBtn = document.getElementById('openCodeModalBtn');
+        const closeCodeModalBtn = document.getElementById('closeCodeModalBtn');
+        const codeExporterModal = document.getElementById('codeExporterModal');
+
+        // Toast
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+
+        // INICIALIZACIÓN
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts(productsData);
+            setupCategoryFilters();
+            setupCustomizerLogic();
+            setupAccordionLogic();
+            setupEventListeners();
+            setupCodeExporterTabs();
+        });
+
+        // RENDERIZAR PRODUCTOS
+        function renderProducts(products) {
+            productsGrid.innerHTML = '';
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card bg-white rounded-3xl overflow-hidden border border-amber-100 shadow-sm flex flex-col justify-between';
+                card.innerHTML = `
+                    <div>
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/600x400/D82335/FFFDD0?text=${encodeURIComponent(product.name)}';">
+                            <span class="absolute top-3 right-3 bg-crema text-rojoFresa font-black text-xs px-3 py-1 rounded-full shadow-sm">
+                                $${product.price.toLocaleString('es-CO')} COP
+                            </span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-brand font-bold text-lg text-textoOscuro mb-1.5">${product.name}</h3>
+                            <p class="text-xs text-gray-500 leading-relaxed">${product.description}</p>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0">
+                        <button onclick="addToCart(${product.id})" class="w-full bg-rojoFresa hover:bg-rojoHover text-white py-2.5 rounded-xl font-bold text-xs shadow-sm flex items-center justify-center gap-2 transition-all">
+                            <i class="fa-solid fa-cart-plus"></i> Agregar al Carrito
+                        </button>
+                    </div>
+                `;
+                productsGrid.appendChild(card);
+            });
+        }
+
+        // FILTROS DE CATEGORÍA
+        function setupCategoryFilters() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => {
+                        b.classList.remove('active', 'bg-rojoFresa', 'text-white');
+                        b.classList.add('bg-white', 'text-gray-700');
+                    });
+                    btn.classList.add('active', 'bg-rojoFresa', 'text-white');
+                    btn.classList.remove('bg-white', 'text-gray-700');
+
+                    const category = btn.getAttribute('data-category');
+                    if (category === 'todos') {
+                        renderProducts(productsData);
+                    } else {
+                        const filtered = productsData.filter(p => p.category === category);
+                        renderProducts(filtered);
+                    }
+                });
+            });
+        }
+
+        // AGREGAR AL CARRITO (CATÁLOGO)
+        function addToCart(productId) {
+            const product = productsData.find(p => p.id === productId);
+            if (!product) return;
+
+            const existing = cart.find(item => item.id === productId && !item.isCustom);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    quantity: 1,
+                    isCustom: false
+                });
+            }
+            updateCartUI();
+            showToast(`"${product.name}" añadido al carrito`);
+        }
+
+        // CONFIGURADOR PERSONALIZADO
+        function setupCustomizerLogic() {
+            const baseSelect = document.getElementById('customBase');
+            const sizeSelect = document.getElementById('customSize');
+            const toppingChecks = document.querySelectorAll('.topping-check');
+            const customPriceTotal = document.getElementById('customPriceTotal');
+            const customizerForm = document.getElementById('customizerForm');
+
+            function calculateCustomPrice() {
+                const basePrice = parseInt(baseSelect.options[baseSelect.selectedIndex].getAttribute('data-price')) || 0;
+                const sizeExtra = parseInt(sizeSelect.options[sizeSelect.selectedIndex].getAttribute('data-extra')) || 0;
+                
+                let toppingsTotal = 0;
+                toppingChecks.forEach(check => {
+                    if (check.checked) {
+                        toppingsTotal += parseInt(check.getAttribute('data-price')) || 0;
+                    }
+                });
+
+                const total = basePrice + sizeExtra + toppingsTotal;
+                customPriceTotal.textContent = `$${total.toLocaleString('es-CO')} COP`;
+                return total;
+            }
+
+            baseSelect.addEventListener('change', calculateCustomPrice);
+            sizeSelect.addEventListener('change', calculateCustomPrice);
+            toppingChecks.forEach(c => c.addEventListener('change', calculateCustomPrice));
+
+            customizerForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const total = calculateCustomPrice();
+                const selectedBase = baseSelect.value;
+                const selectedSize = sizeSelect.value;
+                const note = document.getElementById('customNote').value.trim();
+
+                const selectedToppings = [];
+                toppingChecks.forEach(c => {
+                    if (c.checked) selectedToppings.push(c.value);
+                });
+
+                const customItem = {
+                    id: Date.now(),
+                    name: `Personalizado: ${selectedBase}`,
+                    details: `Tamaño: ${selectedSize} | Adicionales: ${selectedToppings.join(', ') || 'Ninguno'}${note ? ' | Nota: ' + note : ''}`,
+                    price: total,
+                    quantity: 1,
+                    isCustom: true
+                };
+
+                cart.push(customItem);
+                updateCartUI();
+                openCart();
+                showToast('Pedido personalizado añadido');
+
+                document.getElementById('customNote').value = '';
+            });
+        }
+
+        // ACTUALIZAR INTERFAZ DEL CARRITO
+        function updateCartUI() {
+            const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+            cartCount.textContent = totalItems;
+
+            cartItemsContainer.innerHTML = '';
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="text-center py-12 text-gray-400">
+                        <i class="fa-solid fa-basket-shopping text-4xl mb-3 block text-gray-300"></i>
+                        <p class="text-xs font-semibold">Tu carrito está vacío</p>
+                    </div>
+                `;
+            } else {
+                cart.forEach((item, index) => {
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'flex justify-between items-center bg-gray-50 p-3 rounded-2xl border border-gray-100 text-xs sm:text-sm';
+                    itemEl.innerHTML = `
+                        <div class="pr-2 space-y-0.5">
+                            <h4 class="font-bold text-textoOscuro">${item.name}</h4>
+                            ${item.details ? `<p class="text-[11px] text-gray-500">${item.details}</p>` : ''}
+                            <span class="text-xs font-bold text-rojoFresa">$${item.price.toLocaleString('es-CO')} COP</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 flex-shrink-0">
+                            <button onclick="changeQuantity(${index}, -1)" class="w-6 h-6 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center font-bold text-xs">-</button>
+                            <span class="font-bold w-4 text-center text-xs">${item.quantity}</span>
+                            <button onclick="changeQuantity(${index}, 1)" class="w-6 h-6 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center font-bold text-xs">+</button>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(itemEl);
+                });
+            }
+
+            const itemsSubtotal = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+            const deliveryCost = deliveryOption.value.includes('Domicilio') ? 2000 : 0;
+            const grandTotal = itemsSubtotal + (cart.length > 0 ? deliveryCost : 0);
+
+            cartTotal.textContent = `$${grandTotal.toLocaleString('es-CO')} COP`;
+        }
+
+        function changeQuantity(index, delta) {
+            cart[index].quantity += delta;
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        // ACCIONES DE ACORDEÓN PARA CRONOGRAMA
+        function setupAccordionLogic() {
+            const accordionToggles = document.querySelectorAll('.accordion-toggle');
+            accordionToggles.forEach(toggle => {
+                toggle.addEventListener('click', () => {
+                    const content = toggle.nextElementSibling;
+                    const icon = toggle.querySelector('i');
+
+                    // Toggle current
+                    content.classList.toggle('hidden');
+                    if (icon) {
+                        icon.classList.toggle('rotate-180');
+                    }
+                });
+            });
+        }
+
+        // TABS MODAL CÓDIGO FUENTE
+        function setupCodeExporterTabs() {
+            const tabs = document.querySelectorAll('.code-tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => {
+                        t.classList.remove('active', 'bg-white', 'text-rojoFresa', 'border-t', 'border-x', 'border-gray-200');
+                        t.classList.add('text-gray-600');
+                    });
+                    tab.classList.add('active', 'bg-white', 'text-rojoFresa', 'border-t', 'border-x', 'border-gray-200');
+                    tab.classList.remove('text-gray-600');
+
+                    const targetTab = tab.getAttribute('data-tab');
+                    document.querySelectorAll('.code-content').forEach(c => c.classList.add('hidden'));
+                    document.getElementById(targetTab).classList.remove('hidden');
+                });
+            });
+        }
+
+        // COPIAR AL PORTAPAPELES
+        function copyCodeContent(elementId) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            
+            const textToCopy = el.innerText;
+            
+            // Usar ejecucíón estándar document.execCommand para compatibilidad con iframe
+            const textarea = document.createElement('textarea');
+            textarea.value = textToCopy;
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                document.execCommand('copy');
+                showToast('¡Código copiado al portapapeles!');
+            } catch (err) {
+                showToast('Error al copiar el código');
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // MODAL EVENT LISTENERS
+        function openCart() {
+            cartModal.classList.remove('opacity-0', 'pointer-events-none');
+        }
+
+        function closeCart() {
+            cartModal.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        function showToast(msg) {
+            toastMessage.textContent = msg;
+            toast.classList.remove('hidden');
+            toast.classList.add('animate-toast');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+
+        function setupEventListeners() {
+            cartBtn.addEventListener('click', openCart);
+            closeCartBtn.addEventListener('click', closeCart);
+            deliveryOption.addEventListener('change', updateCartUI);
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Code Modal Events
+            openCodeModalBtn.addEventListener('click', () => {
+                codeExporterModal.classList.remove('opacity-0', 'pointer-events-none');
+            });
+            closeCodeModalBtn.addEventListener('click', () => {
+                codeExporterModal.classList.add('opacity-0', 'pointer-events-none');
+            });
+
+            // CHECKOUT WHATSAPP
+            checkoutBtn.addEventListener('click', () => {
+                if (cart.length === 0) {
+                    showToast('Por favor agrega productos antes de realizar el pedido');
+                    return;
+                }
+
+                let message = `🍓 *NUEVO PEDIDO - FRUTTA & CREMA* 🍓\n`;
+                message += `_El dulce sabor de Yotoco_\n\n`;
+                message += `*Detalle del Pedido:*\n`;
+
+                cart.forEach((item, idx) => {
+                    message += `${idx + 1}. *${item.name}* (x${item.quantity}) - $${(item.price * item.quantity).toLocaleString('es-CO')}\n`;
+                    if (item.details) message += `   └ _${item.details}_\n`;
+                });
+
+                const deliveryText = deliveryOption.value;
+                const itemsSubtotal = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+                const deliveryCost = deliveryText.includes('Domicilio') ? 2000 : 0;
+                const grandTotal = itemsSubtotal + deliveryCost;
+
+                message += `\n*Entrega:* ${deliveryText}\n`;
+                message += `*Total a Pagar:* $${grandTotal.toLocaleString('es-CO')} COP\n\n`;
+                message += `📍 *Ubicación:* Yotoco, Valle del Cauca`;
+
+                const encodedMsg = encodeURIComponent(message);
+                window.open(`https://wa.me/573000000000?text=${encodedMsg}`, '_blank');
+            });
+
+            // Contact Form Demo
+            document.getElementById('contactForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                showToast('¡Gracias! Mensaje enviado con éxito');
+                e.target.reset();
+            });
+        }
+    </script>
+</body>
+</html>
