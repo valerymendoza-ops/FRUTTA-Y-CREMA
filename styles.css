@@ -1,0 +1,609 @@
+
+/* =================================
+   FRUTTA & CREMA - ESTILOS
+================================= */
+
+:root {
+  --rojo: #D82335;
+  --rojo-oscuro: #A91B2B;
+  --verde: #2E8B57;
+  --crema: #FFFDD0;
+  --fondo: #FDFBF7;
+  --texto: #302322;
+  --gris: #776B68;
+  --blanco: #FFFFFF;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--fondo);
+  color: var(--texto);
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* ENCABEZADO */
+
+.encabezado {
+  min-height: 85px;
+  padding: 15px 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--fondo);
+  border-bottom: 1px solid #eadfda;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-icono {
+  font-size: 2.5rem;
+}
+
+.marca strong {
+  display: block;
+  font-family: Georgia, serif;
+  font-size: 1.5rem;
+}
+
+.marca i {
+  color: var(--verde);
+  font-style: normal;
+}
+
+.marca small {
+  display: block;
+  color: var(--verde);
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.menu a:hover {
+  color: var(--rojo);
+}
+
+.boton-menu {
+  background: var(--rojo);
+  color: white;
+  padding: 11px 17px;
+  border-radius: 7px;
+}
+
+.boton-menu:hover {
+  background: var(--rojo-oscuro);
+}
+
+.menu-boton {
+  display: none;
+  border: none;
+  background: transparent;
+  color: var(--rojo);
+  font-size: 1.8rem;
+}
+
+/* INICIO */
+
+.inicio {
+  min-height: 560px;
+  padding: 70px 9%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 30px;
+  background:
+    radial-gradient(circle at 80% 40%, #f5dfd1, transparent 40%),
+    var(--fondo);
+}
+
+.etiqueta {
+  color: var(--verde);
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.inicio h1 {
+  font-family: Georgia, serif;
+  font-size: clamp(2.7rem, 5vw, 4.5rem);
+  line-height: 1.15;
+  margin: 20px 0;
+}
+
+h1 em,
+h2 em {
+  color: var(--rojo);
+}
+
+.inicio-texto > p {
+  color: var(--gris);
+  max-width: 480px;
+  margin-bottom: 25px;
+}
+
+.boton-principal {
+  display: inline-block;
+  border: none;
+  background: var(--rojo);
+  color: white;
+  padding: 14px 22px;
+  border-radius: 7px;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.boton-principal:hover {
+  background: var(--rojo-oscuro);
+  transform: translateY(-2px);
+}
+
+.ubicacion {
+  margin-top: 25px;
+  color: var(--gris);
+  font-size: 0.85rem;
+}
+
+/* ILUSTRACIÓN DEL INICIO */
+
+.inicio-imagen {
+  min-height: 360px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.circulo-decorativo {
+  width: 310px;
+  height: 310px;
+  border-radius: 50%;
+  background: #f4d8c8;
+  position: absolute;
+}
+
+.postre-ilustrado {
+  position: absolute;
+  z-index: 2;
+  top: 30px;
+  left: 20%;
+  font-size: 6rem;
+  transform: rotate(-15deg);
+}
+
+.vaso-ilustrado {
+  position: relative;
+  z-index: 3;
+  font-size: 9rem;
+  filter: drop-shadow(0 12px 8px #7a292922);
+}
+
+.texto-decorativo {
+  position: absolute;
+  z-index: 4;
+  bottom: 35px;
+  right: 5%;
+  color: var(--verde);
+  font-family: Georgia, serif;
+  font-size: 1.1rem;
+  transform: rotate(-8deg);
+}
+
+/* TÍTULOS DE SECCIÓN */
+
+.seccion {
+  padding: 85px 9%;
+}
+
+.titulo-seccion {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.titulo-seccion h2,
+.nosotros h2,
+.personaliza h2 {
+  font-family: Georgia, serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.2;
+  margin: 15px 0;
+}
+
+.titulo-seccion p {
+  color: var(--gris);
+}
+
+/* PRODUCTOS */
+
+.productos {
+  background: var(--blanco);
+}
+
+.rejilla-productos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.tarjeta {
+  background: white;
+  border: 1px solid #eee4de;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.tarjeta:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px #49231a12;
+}
+
+.producto-imagen {
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+}
+
+.fresa {
+  background: #F9E2E2;
+}
+
+.postre {
+  background: #F9EDCB;
+}
+
+.frutas {
+  background: #E2EEE1;
+}
+
+.regalo {
+  background: #EEE5F1;
+}
+
+.producto-contenido {
+  padding: 20px;
+}
+
+.producto-contenido h3 {
+  font-family: Georgia, serif;
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+}
+
+.producto-contenido p {
+  color: var(--gris);
+  font-size: 0.85rem;
+  min-height: 80px;
+}
+
+.boton-pedido {
+  border: none;
+  border-top: 1px solid #eadfda;
+  background: transparent;
+  color: var(--rojo);
+  font-weight: bold;
+  width: 100%;
+  text-align: left;
+  padding-top: 14px;
+  margin-top: 10px;
+}
+
+.boton-pedido:hover {
+  color: var(--rojo-oscuro);
+}
+
+.nota-precios {
+  color: var(--gris);
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: 25px;
+}
+
+/* IDENTIDAD CORPORATIVA */
+
+.nosotros {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 60px;
+  align-items: center;
+  background: #F7F0E9;
+}
+
+.nosotros-icono {
+  min-height: 280px;
+  border-radius: 50%;
+  background: #f3dfd2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 9rem;
+}
+
+.nosotros h2 {
+  margin-bottom: 25px;
+}
+
+.nosotros h3 {
+  color: var(--verde);
+  margin: 18px 0 5px;
+}
+
+.nosotros p {
+  color: var(--gris);
+  font-size: 0.92rem;
+}
+
+.valores {
+  padding-left: 22px;
+  columns: 2;
+}
+
+.valores li {
+  padding: 4px 0;
+}
+
+/* SECCIÓN DE PERSONALIZACIÓN */
+
+.personaliza {
+  background: var(--rojo);
+  color: white;
+  text-align: center;
+  padding: 75px 8%;
+}
+
+.personaliza .etiqueta {
+  color: #FFE6BD;
+}
+
+.personaliza h2 em {
+  color: #FFE6BD;
+}
+
+.personaliza p {
+  max-width: 600px;
+  margin: 0 auto 25px;
+  color: #FFE4DF;
+}
+
+.boton-claro {
+  display: inline-block;
+  background: var(--crema);
+  color: var(--rojo);
+  padding: 13px 20px;
+  border-radius: 7px;
+  font-weight: bold;
+}
+
+.boton-claro:hover {
+  background: white;
+}
+
+/* FORMULARIO */
+
+.contacto {
+  background: var(--fondo);
+}
+
+#formularioPedido {
+  max-width: 700px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#formularioPedido label {
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+#formularioPedido input,
+#formularioPedido select,
+#formularioPedido textarea {
+  width: 100%;
+  border: 1px solid #dfd3cc;
+  border-radius: 7px;
+  padding: 13px;
+  background: white;
+  color: var(--texto);
+}
+
+#formularioPedido input:focus,
+#formularioPedido select:focus,
+#formularioPedido textarea:focus {
+  outline: 2px solid #b6d9c1;
+  border-color: var(--verde);
+}
+
+#formularioPedido button[type="submit"] {
+  align-self: flex-start;
+  margin-top: 15px;
+}
+
+#mensaje {
+  color: var(--verde);
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+#mensajeGenerado {
+  margin-top: 8px;
+}
+
+/* PIE DE PÁGINA */
+
+.pie {
+  background: #302927;
+  color: white;
+  text-align: center;
+  padding: 35px 15px;
+}
+
+.marca-pie {
+  display: inline-block;
+  font-family: Georgia, serif;
+  font-size: 1.6rem;
+}
+
+.marca-pie i {
+  color: #8ac29b;
+  font-style: normal;
+}
+
+.pie p {
+  color: #ddd0ca;
+  font-size: 0.85rem;
+  margin-top: 8px;
+}
+
+/* ADAPTACIÓN PARA TABLETAS */
+
+@media (max-width: 1000px) {
+  .rejilla-productos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .inicio {
+    padding: 60px 6%;
+  }
+
+  .seccion {
+    padding: 70px 6%;
+  }
+
+  .nosotros {
+    gap: 30px;
+  }
+}
+
+/* ADAPTACIÓN PARA CELULARES */
+
+@media (max-width: 700px) {
+  .encabezado {
+    padding: 12px 5%;
+  }
+
+  .menu-boton {
+    display: block;
+  }
+
+  .menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background: var(--fondo);
+    flex-direction: column;
+    gap: 18px;
+    box-shadow: 0 10px 15px #00000010;
+  }
+
+  .menu.abierto {
+    display: flex;
+  }
+
+  .inicio {
+    grid-template-columns: 1fr;
+    padding: 50px 7%;
+  }
+
+  .inicio h1 {
+    font-size: 3rem;
+  }
+
+  .inicio-imagen {
+    min-height: 300px;
+  }
+
+  .circulo-decorativo {
+    width: 250px;
+    height: 250px;
+  }
+
+  .vaso-ilustrado {
+    font-size: 7rem;
+  }
+
+  .postre-ilustrado {
+    font-size: 4.5rem;
+  }
+
+  .rejilla-productos {
+    grid-template-columns: 1fr;
+  }
+
+  .producto-contenido p {
+    min-height: auto;
+    margin-bottom: 15px;
+  }
+
+  .nosotros {
+    grid-template-columns: 1fr;
+  }
+
+  .nosotros-icono {
+    min-height: 200px;
+    font-size: 6rem;
+  }
+
+  .valores {
+    columns: 1;
+  }
+
+  .seccion {
+    padding: 55px 7%;
+  }
+
+  .personaliza {
+    padding: 55px 7%;
+  }
+
+  #formularioPedido button[type="submit"] {
+    width: 100%;
+  }
+}
