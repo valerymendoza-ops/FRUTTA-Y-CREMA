@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Frutta & Crema | El dulce sabor de Yotoco</title>
+
+  <meta name="description" content="Postres, fresas con crema y vasos de frutas en Yotoco, Valle del Cauca.">
+
+  <link rel="stylesheet" href="styles.css">
+  <script src="main.js" defer></script>
+</head>
+
+<body>
+
+  <!-- ENCABEZADO Y MENÚ -->
+  <header class="encabezado" id="inicio">
+    <a href="#inicio" class="marca">
+      <span class="logo-icono">🍓</span>
+      <span>
+        <strong>Frutta <i>&</i> Crema</strong>
+        <small>EL DULCE SABOR DE YOTOCO</small>
+      </span>
+    </a>
+
+    <button class="menu-boton" id="menuBoton"
+      aria-label="Abrir menú" aria-expanded="false">
+      ☰
+    </button>
+
+    <nav class="menu" id="menu">
+      <a href="#inicio">Inicio</a>
+      <a href="#productos">Productos</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#contacto" class="boton-menu">Haz tu pedido</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- SECCIÓN PRINCIPAL -->
+    <section class="inicio">
+      <div class="inicio-texto">
+        <span class="etiqueta">FRESCO · DULCE · DELICIOSO</span>
+
+        <h1>
+          Un antojo dulce,
+          <em>una alegría</em>
+          en cada vaso.
+        </h1>
+
+        <p>
+          Postres, fresas con crema, vasos de frutas y productos
+          personalizados para disfrutar de momentos especiales.
+        </p>
+
+        <a href="#productos" class="boton-principal">
+          Descubre nuestros productos →
+        </a>
+
+        <p class="ubicacion">📍 Yotoco, Valle del Cauca</p>
+      </div>
+
+      <div class="inicio-imagen">
+        <div class="circulo-decorativo"></div>
+        <div class="postre-ilustrado">🍓</div>
+        <div class="vaso-ilustrado">🍨</div>
+        <span class="texto-decorativo">Hecho con cariño ♡</span>
+      </div>
+    </section>
+
+    <!-- PRODUCTOS -->
+    <section class="productos seccion" id="productos">
+      <div class="titulo-seccion">
+        <span class="etiqueta">NUESTRO MENÚ</span>
+        <h2>Pequeños placeres, <em>grandes sonrisas.</em></h2>
+        <p>Encuentra algo delicioso para cada ocasión.</p>
+      </div>
+
+      <div class="rejilla-productos">
+
+        <article class="tarjeta">
+          <div class="producto-imagen fresa">🍓</div>
+          <div class="producto-contenido">
+            <h3>Fresas con crema</h3>
+            <p>Fresas frescas acompañadas de una cremosa combinación.</p>
+            <button class="boton-pedido"
+              data-producto="Fresas con crema">
+              Pedir producto →
+            </button>
+          </div>
+        </article>
+
+        <article class="tarjeta">
+          <div class="producto-imagen postre">🍨</div>
+          <div class="producto-contenido">
+            <h3>Postres especiales</h3>
+            <p>Alternativas dulces con presentaciones atractivas.</p>
+            <button class="boton-pedido"
+              data-producto="Postres especiales">
+              Pedir producto →
+            </button>
+          </div>
+        </article>
+
+        <article class="tarjeta">
+          <div class="producto-imagen frutas">🍍</div>
+          <div class="producto-contenido">
+            <h3>Vasos de frutas</h3>
+            <p>Combinaciones de frutas frescas y llenas de color.</p>
+            <button class="boton-pedido"
+              data-producto="Vasos de frutas">
+              Pedir producto →
+            </button>
+          </div>
+        </article>
+
+        <article class="tarjeta">
+          <div class="producto-imagen regalo">🎁</div>
+          <div class="producto-contenido">
+            <h3>Detalles personalizados</h3>
+            <p>Opciones especiales para celebraciones y regalos.</p>
+            <button class="boton-pedido"
+              data-producto="Detalles personalizados">
+              Pedir producto →
+            </button>
+          </div>
+        </article>
+
+      </div>
+
+      <p class="nota-precios">
+        Consulta disponibilidad, tamaños y precios al realizar tu pedido.
+      </p>
+    </section>
+
+    <!-- IDENTIDAD CORPORATIVA -->
+    <section class="nosotros seccion" id="nosotros">
+      <div class="nosotros-icono">🍓</div>
+
+      <div>
+        <span class="etiqueta">NUESTRA ESENCIA</span>
+        <h2>El sabor importa. <em>Tu experiencia también.</em></h2>
+
+        <h3>Misión</h3>
+        <p>
+          Ofrecer postres, fresas con crema, vasos de frutas y productos
+          personalizados de excelente calidad, con ingredientes frescos,
+          presentaciones atractivas y atención cercana.
+        </p>
+
+        <h3>Visión</h3>
+        <p>
+          Para el año 2031, ser un emprendimiento reconocido en Yotoco
+          por la calidad, creatividad y presentación de nuestros productos.
+        </p>
+
+        <h3>Nuestros valores</h3>
+        <ul class="valores">
+          <li>Calidad</li>
+          <li>Responsabilidad</li>
+          <li>Creatividad</li>
+          <li>Honestidad</li>
+          <li>Compromiso con el cliente</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- PERSONALIZACIÓN -->
+    <section class="personaliza">
+      <span class="etiqueta">UN DETALLE ESPECIAL</span>
+      <h2>¿Lo hacemos <em>a tu manera?</em></h2>
+      <p>
+        Cuéntanos qué se te antoja y qué ocasión quieres celebrar.
+        Revisaremos contigo las opciones disponibles.
+      </p>
+      <a href="#contacto" class="boton-claro">
+        Quiero personalizar mi pedido →
+      </a>
+    </section>
+
+    <!-- FORMULARIO DE PEDIDOS -->
+    <section class="contacto seccion" id="contacto">
+      <div class="titulo-seccion">
+        <span class="etiqueta">HABLEMOS DE ALGO DELICIOSO</span>
+        <h2>Prepara tu <em>pedido.</em></h2>
+        <p>Completa los datos para preparar tu mensaje.</p>
+      </div>
+
+      <form id="formularioPedido">
+        <label for="nombre">Tu nombre</label>
+        <input type="text" id="nombre"
+          placeholder="Escribe tu nombre" required>
+
+        <label for="producto">¿Qué producto deseas?</label>
+        <select id="producto" required>
+          <option value="">Selecciona un producto</option>
+          <option>Fresas con crema</option>
+          <option>Postres especiales</option>
+          <option>Vasos de frutas</option>
+          <option>Detalles personalizados</option>
+          <option>Consultar opciones</option>
+        </select>
+
+        <label for="detalles">Detalles del pedido</label>
+        <textarea id="detalles" rows="4"
+          placeholder="Cantidad, tamaño, fecha u ocasión..."></textarea>
+
+        <button type="submit" class="boton-principal">
+          Preparar pedido →
+        </button>
+
+        <p id="mensaje" aria-live="polite"></p>
+        <textarea id="mensajeGenerado" rows="4"
+          aria-label="Mensaje generado" hidden></textarea>
+        <button type="button" id="copiarMensaje" hidden>
+          Copiar mensaje
+        </button>
+      </form>
+
+      <p class="ubicacion">📍 Yotoco, Valle del Cauca, Colombia</p>
+    </section>
+
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="pie">
+    <a href="#inicio" class="marca marca-pie">
+      Frutta <i>&</i> Crema 🍓
+    </a>
+
+    <p>El dulce sabor de Yotoco.</p>
+    <p>© <span id="anio"></span> Frutta & Crema</p>
+  </footer>
+
+</body>
+</html>
